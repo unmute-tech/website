@@ -1,0 +1,34 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: 700;
+	font-family: 'Montserrat';
+	color: #e8830f;
+}
+
+.copyright {
+	background-color: #d67200;
+	color: #fff;
+}
+
+a:focus, a:hover, a:active {
+	color: #e8830f;
+}
+
+.bg-secondary { /* menu bar */
+	background-color: #d67200 !important;
+}
+
+.btn {
+	background-color: #fb9521;
+	border-color: #fb9521;
+	color: #fff;
+}
+
+.btn:hover, .btn:focus, .btn:active {
+	background-color: #e8830f;
+	border-color: #e8830f;
+}
