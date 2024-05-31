@@ -12,29 +12,37 @@
 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
 		<link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 		<link href="include/unmute.css" rel="stylesheet">
+
+		<!-- scripts required only to expand/contract navbar -->
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 	</head>
 	<body id="page-top">
-		<nav class="navbar navbar-expand-lg bg-secondary fixed-top" id="mainNav">
-			<div class="container">
-				<span id="dynamic-title" class="navbar-brand">UnMute</span>
-				<div class="collapse navbar-collapse" id="navbarResponsive">
-					<ul class="navbar-nav ml-auto">
-						<li class="nav-item mx-0 mx-lg-1">
-							<a class="nav-link py-3 px-0 px-lg-3 rounded" href="toolkit/">Toolkit</a>
-						</li>
-						<li class="nav-item mx-0 mx-lg-1">
-							<a class="nav-link py-3 px-0 px-lg-3 rounded" href="#research">Research</a>
-						</li>
-						<li class="nav-item mx-0 mx-lg-1">
-							<a class="nav-link py-3 px-0 px-lg-3 rounded" href="#team">Team</a>
-						</li>
-						<li class="nav-item mx-0 mx-lg-1">
-							<a class="nav-link py-3 px-0 px-lg-3 rounded" href="#contact">Contact</a>
-						</li>
-					</ul>
-				</div>
+		<div class="navbar navbar-expand-lg bg-secondary fixed-top">
+			<span id="dynamic-title" class="navbar-brand text-white">UnMute</span>	
+			<div class="collapse navbar-dark navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item mx-0 mx-lg-1">
+						<a class="nav-link py-3 px-0 px-lg-3 rounded" href="toolkit/">Toolkit</a>
+					</li>
+					<li class="nav-item mx-0 mx-lg-1">
+						<a class="nav-link py-3 px-0 px-lg-3 rounded" href="#research">Research</a>
+					</li>
+					<li class="nav-item mx-0 mx-lg-1">
+						<a class="nav-link py-3 px-0 px-lg-3 rounded" href="#team">Team</a>
+					</li>
+					<li class="nav-item mx-0 mx-lg-1">
+						<a class="nav-link py-3 px-0 px-lg-3 rounded" href="#contact">Contact</a>
+					</li>
+				</ul>
 			</div>
-		</nav>
+			<span class="navbar-brand"></span><!-- duplicate to push navigation button to right -->
+			<nav class="navbar navbar-dark bg-secondary">
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+			</nav>
+		</div>
 
 		<header class="masthead bg-primary text-center">
 			<div class="container col-xl-8 col-lg-8 col-md-8">
@@ -49,7 +57,7 @@
 				<hr class="mb-5">
 				<p class="lead text-center">UnMute is a collaborative <a href="https://gow.epsrc.ukri.org/NGBOViewGrant.aspx?GrantRef=EP/T024976/1">EPSRC-funded</a> project between the <a href="https://www.ed.ac.uk/">University of Edinburgh</a>, <a href="https://www.swansea.ac.uk/">Swansea University</a>, <a href="https://translatorswithoutborders.org/">Translators Without Borders</a> and <a href="https://www.auris.tech/">Auris Tech</a>, aiming to address the limitations of today's speech and voice-based interactions and open up intelligent interfaces to the currently digitally ‘unheard’.</p>
 				<p class="lead text-center mb-5">While state-of-the-art natural language systems are beginning to address the needs of “conventional” users (i.e., those who speak a widely spoken and written language; and who have relatively high degrees of literacy, exposure to digital interactions and other resources), there are many hundreds millions of people who are being excluded globally. Paradoxically, these users who have resource constraints (such as low digital and textual literacy) could be the ones to most benefit from advances in speech-based interactive systems, opening up economic, social and educational possibilities that are currently unmet.</p>
-				<p class="lead text-center mb-5">In advancing this area of research, we hope to produce a blueprint and toolkit that can be used by many other low or zero-resource language communities, worldwide.</p>
+				<p class="lead text-center mb-5">In advancing this area of research, we have produced a <a href="toolkit/">toolkit and blueprint</a> that can be used by many other low or zero-resource language communities, worldwide.</p>
 				<h3 class="text-center">Publications</h3>
 				<ul class="lead">
 					<li><a href="https://cronfa.swan.ac.uk/Record/cronfa65595/">Cultivating Spoken Language Technologies for Unwritten Languages</a>. <em>Reitmaier, T. Raju, D. Klejch, O. Wallington, E. Markl, N. Pearson, J. Jones, M. Bell, P. Robinson. S., CHI 2024</em></li>
@@ -174,12 +182,18 @@
 			window.onscroll = function() { updateTitle() };
 			function updateTitle() {
 				var headerPosition = 250;
-				if (document.body.scrollTop > headerPosition || document.documentElement.scrollTop > headerPosition) {
+				if (document.body.scrollTop > headerPosition || document.documentElement.scrollTop > headerPosition || document.getElementById('navbarResponsive').classList.contains('show')) {
 					document.getElementById('dynamic-title').innerHTML = 'UnMute';
 				} else {
 					document.getElementById('dynamic-title').innerHTML = '&nbsp;';
 				}
 			}
+			function delayedTitleUpdate() {
+				setTimeout(updateTitle, 400); // default Bootstrap animation duration of 350ms + 50ms slack
+			}
+			[...document.getElementsByClassName('navbar-toggler')].forEach((element) => {
+				element.addEventListener('click', delayedTitleUpdate);
+			});
 			updateTitle();
 		</script>
 	</body>
